@@ -1,24 +1,20 @@
 <template>
 	<div class="home" :class="themeColor">
-		首页
-		<HelloWorld msg="Welcome to Your Vue.js App" />
 		<SelectTheme :visible.sync="isShowSelectTheme" :theme.sync="theme"></SelectTheme>
-		<TabMain></TabMain>
+		<BasicSet></BasicSet>
 	</div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
 import SelectTheme from '@/components/SelectTheme.vue';
-import TabMain from '@/components/TabMain.vue';
+import BasicSet from '@/views/BasicSet.vue';
 
 export default {
 	name: 'Home',
 	components: {
-		HelloWorld,
 		SelectTheme,
-		TabMain
+		BasicSet
 	},
 	data() {
 		return {
