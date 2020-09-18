@@ -1,20 +1,20 @@
 <template>
 	<div class="home" :class="themeColor">
 		<SelectTheme :visible.sync="isShowSelectTheme" :theme.sync="theme"></SelectTheme>
-		<BasicSet></BasicSet>
+		<Set></Set>
 	</div>
 </template>
 
 <script>
 // @ is an alias to /src
 import SelectTheme from '@/components/SelectTheme.vue';
-import BasicSet from '@/views/BasicSet.vue';
+import Set from '@/views/Set.vue';
 
 export default {
 	name: 'Home',
 	components: {
 		SelectTheme,
-		BasicSet
+		Set
 	},
 	data() {
 		return {
