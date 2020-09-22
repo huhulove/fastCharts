@@ -7,7 +7,7 @@ const createLoginWindow = () => {
 		width: 440,
 		height: 330,
 		icon: path.join(__dirname, process.env.NODE_ENV === 'production' ? './app.ico' : '../public/app.ico'),
-		/* frame: false, */
+		frame: false,
 		webPreferences: {
 			nodeIntegration: true
 		}
