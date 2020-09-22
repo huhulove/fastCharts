@@ -6,11 +6,12 @@
     macOS: app.png或app.icns 最小尺寸：512x512
 */
 module.exports = {
+	publicPath: './',
 	pluginOptions: {
 		electronBuilder: {
 			builderOptions: {
 				appId: 'com.huhulove.app',
-				productName: 'electron.vue.layout', // 项目名，也是生成的安装文件名
+				productName: 'fastCharts', // 项目名，也是生成的安装文件名
 				copyright: 'Copyright © 2020', // 版权信息
 				directories: {
 					output: './dist_electron' // 输出文件路径
