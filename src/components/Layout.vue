@@ -45,11 +45,9 @@
 </template>
 
 <script>
-import gridMixin from '@/mixins/grid.1920.js';
 
 export default {
 	name: 'layout',
-	mixins: [gridMixin],
 	props: ['topHeight_p', 'bottomHeight_p'],
 	data() {
 		return {

@@ -1,31 +1,27 @@
 <template>
 	<div class="set">
-		<Layout :topHeight_p="topHeight" :bottomHeight_p="bottomHeight"></Layout>
 		<div class="set-button">
 			<el-button type="primary" @click="paramsDrawerChange">
 				<i class="el-icon-s-fold"></i>
 				设置
 			</el-button>
 		</div>
-		<Params :visible.sync="isShowParamsDrawer" :topHeight_p.sync="topHeight" :bottomHeight_p.sync="bottomHeight"></Params>
+		<Params :visible.sync="isShowParamsDrawer" v-bind="$attrs" v-on="$listeners"></Params>
 	</div>
 </template>
 
 <script>
-import Layout from '@/components/Layout.vue';
 import Params from '@/components/Params.vue';
 
 export default {
+	inheritAttrs: false,
 	name: 'layout',
 	components: {
-		Layout,
 		Params
 	},
 	data() {
 		return {
-			isShowParamsDrawer: false,
-			topHeight: null,
-			bottomHeight: null
+			isShowParamsDrawer: false
 		};
 	},
 	methods: {

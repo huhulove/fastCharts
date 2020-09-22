@@ -8,7 +8,6 @@
 				<el-input v-model="form.bottomHeight" @blur="bottomHeightChange"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<el-button>取消</el-button>
 				<el-button type="primary" @click="submitForm">导出</el-button>
 			</el-form-item>
 		</el-form>
@@ -21,15 +20,19 @@ import initRenderProjectMixin from '@/mixins/initRenderProject.mixin.js';
 const { dialog } = window.require('electron').remote;
 
 export default {
-	inheritAttrs: true,
+	inheritAttrs: false,
 	mixins: [initRenderProjectMixin],
 	data() {
 		return {
 			form: {
-				topHeight: null,
-				bottomHeight: null
+				topHeight: 40,
+				bottomHeight: 40
 			}
 		};
+	},
+	mounted() {
+		this.topHeightChange();
+		this.bottomHeightChange();
 	},
 	methods: {
 		topHeightChange() {
@@ -42,9 +45,9 @@ export default {
 			try {
 				const res = await dialog.showOpenDialog({
 					title: '请选择文件夹',
-					properties: ['openDirectory']
+					properties: ['openFile', 'openDirectory']
 				});
-				this.initRenderProject(res.filePaths);
+				this.saveFile(res.filePaths);
 			} catch (error) {
 				console.log(error);
 			}

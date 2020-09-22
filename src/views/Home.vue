@@ -1,25 +1,30 @@
 <template>
 	<div class="home" :class="themeColor">
+		<Layout ref="layout" :topHeight_p="topHeight" :bottomHeight_p="bottomHeight"></Layout>
 		<SelectTheme :visible.sync="isShowSelectTheme" :theme.sync="theme"></SelectTheme>
-		<Set></Set>
+		<Set :topHeight_p.sync="topHeight" :bottomHeight_p.sync="bottomHeight"></Set>
 	</div>
 </template>
 
 <script>
 // @ is an alias to /src
+import Layout from '@/components/Layout.vue';
 import SelectTheme from '@/components/SelectTheme.vue';
 import Set from '@/views/Set.vue';
 
 export default {
 	name: 'Home',
 	components: {
+		Layout,
 		SelectTheme,
 		Set
 	},
 	data() {
 		return {
 			isShowSelectTheme: false,
-			theme: null
+			theme: null,
+			topHeight: null,
+			bottomHeight: null
 		};
 	},
 	computed: {
@@ -37,6 +42,8 @@ export default {
 		this.$ipcRenderer.on('theme', (event, theme) => {
 			this.theme = theme;
 		});
+
+		/* console.log(this.$refs.layout.$el); */
 	},
 	methods: {}
 };
