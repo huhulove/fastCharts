@@ -42,8 +42,6 @@ export default {
 		this.$ipcRenderer.on('theme', (event, theme) => {
 			this.theme = theme;
 		});
-
-		/* console.log(this.$refs.layout.$el); */
 	},
 	methods: {}
 };

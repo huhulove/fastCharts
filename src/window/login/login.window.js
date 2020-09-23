@@ -1,4 +1,5 @@
 import { BrowserWindow, globalShortcut } from 'electron';
+import { createProtocol } from 'vue-cli-plugin-electron-builder/lib';
 import path from 'path';
 
 const createLoginWindow = () => {
@@ -22,7 +23,7 @@ const createLoginWindow = () => {
 	} else {
 		createProtocol('app');
 		// 生产模式时加载 index.html
-		winLogin.loadURL('app://./index.html/');
+		winLogin.loadURL('app://./index.html');
 	}
 	return winLogin;
 };
