@@ -7,6 +7,8 @@ import store from './store';
 import './plugins/elementUI';
 import './plugins/theme';
 
+/* 引入自定义指令 */
+
 const { ipcRenderer } = window.require('electron');
 
 Vue.prototype.$ipcRenderer = ipcRenderer;

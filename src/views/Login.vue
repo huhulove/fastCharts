@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import MenuLogin from '../components/Menu.login';
+import MenuLogin from '../components/menu.login';
 
 export default {
 	components: {

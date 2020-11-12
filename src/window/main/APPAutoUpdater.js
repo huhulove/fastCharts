@@ -29,7 +29,7 @@ const checkVersion = win => {
 		}
 	};
 	let isInstall;
-	autoUpdater.setFeedURL('http://localhost:8090/');
+	autoUpdater.setFeedURL('http://localhost:8003/fastCharts_version/');
 
 	// 将自动下载包设置为false，产品的需求是让用户自己点击更新下载
 	// autoUpdater.autoDownload = false;

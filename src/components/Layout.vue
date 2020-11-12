@@ -1,51 +1,28 @@
 <template>
 	<div class="layout">
-		<div class="top" :style="{ height: topHeight + 'px' }">
-			logo
-		</div>
+		<div class="top" :style="{ height: topHeight + 'px' }">logo</div>
 		<div class="center" :style="{ height: centerHeight }">
 			<div class="center-left">
-				<div class="center-left-top" style="height: 25%">
-					center-left-top
-				</div>
-				<div class="center-left-center" style="height: 25%">
-					center-left-center
-				</div>
-				<div class="center-left-bottom" style="height: 50%">
-					center-left-bottom
-				</div>
+				<div class="center-left-top" style="height: 25%">center-left-top</div>
+				<div class="center-left-center" style="height: 25%">center-left-center</div>
+				<div class="center-left-bottom" style="height: 50%">center-left-bottom</div>
 			</div>
 			<div class="center-center">
-				<div class="center-center-top" style="height: 12.5%">
-					center-center-top
-				</div>
-				<div class="center-center-center" style="height: 62.5%">
-					center-center-center
-				</div>
-				<div class="center-center-bottom" style="height: 25%">
-					center-center-bottom
-				</div>
+				<div class="center-center-top" style="height: 12.5%">center-center-top</div>
+				<div class="center-center-center" style="height: 62.5%">center-center-center</div>
+				<div class="center-center-bottom" style="height: 25%">center-center-bottom</div>
 			</div>
 			<div class="center-right">
-				<div class="center-right-top" style="height: 25%">
-					center-right-top
-				</div>
-				<div class="center-right-center" style="height: 50%">
-					center-right-center
-				</div>
-				<div class="center-right-bottom" style="height: 25%">
-					center-right-bottom
-				</div>
+				<div class="center-right-top" style="height: 25%">center-right-top</div>
+				<div class="center-right-center" style="height: 50%">center-right-center</div>
+				<div class="center-right-bottom" style="height: 25%">center-right-bottom</div>
 			</div>
 		</div>
-		<div class="bottom" :style="{ height: bottomHeight + 'px' }">
-			footer
-		</div>
+		<div class="bottom" :style="{ height: bottomHeight + 'px' }">footer</div>
 	</div>
 </template>
 
 <script>
-
 export default {
 	name: 'layout',
 	props: ['topHeight_p', 'bottomHeight_p'],
