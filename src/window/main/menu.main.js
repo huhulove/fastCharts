@@ -40,7 +40,7 @@ const customMenu = win => {
 				},
 				{
 					// 添加快捷键
-					accelerator: 'ctrl+t',
+					accelerator: 'alt+g',
 					// 子标题
 					label: '设置全局参数',
 					// 子标题类型 type String

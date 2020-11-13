@@ -28,9 +28,9 @@ export default {
 	props: ['topHeight_p', 'bottomHeight_p'],
 	data() {
 		return {
-			topHeight: 0,
+			topHeight: 40,
 			centerHeight: 0,
-			bottomHeight: 0
+			bottomHeight: 40
 		};
 	},
 	watch: {
@@ -46,9 +46,6 @@ export default {
 	},
 	methods: {
 		initHeight() {
-			this.topHeight = this.topHeight_p;
-			this.bottomHeight = this.bottomHeight_p;
-			console.log(this.topHeight_p);
 			this.centerHeight = `calc(100vh - ${this.topHeight}px - ${this.bottomHeight}px )`;
 		}
 	}
