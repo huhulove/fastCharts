@@ -1,44 +1,50 @@
 <template>
-	<div class="layout">
-		<div class="top" :style="{ height: topHeight + 'px' }">logo</div>
-		<div class="center" :style="{ height: centerHeight }">
-			<div class="center-left">
-				<div class="center-left-top" style="height: 25%">center-left-top</div>
-				<div class="center-left-center" style="height: 25%">center-left-center</div>
-				<div class="center-left-bottom" style="height: 50%">center-left-bottom</div>
+	<div>
+		<div class="layout" :style="layoutStyle">
+			<div class="top" :style="{ height: topHeight + 'px' }">logo</div>
+			<div class="center" :style="{ height: centerHeight }">
+				<div class="center-left">
+					<div class="center-left-top" style="height: 25%">center-left-top</div>
+					<div class="center-left-center" style="height: 25%">center-left-center</div>
+					<div class="center-left-bottom" style="height: 50%">center-left-bottom</div>
+				</div>
+				<div class="center-center">
+					<div class="center-center-top" style="height: 12.5%">center-center-top</div>
+					<div class="center-center-center" style="height: 62.5%">center-center-center</div>
+					<div class="center-center-bottom" style="height: 25%">center-center-bottom</div>
+				</div>
+				<div class="center-right">
+					<div class="center-right-top" style="height: 25%">center-right-top</div>
+					<div class="center-right-center" style="height: 50%">center-right-center</div>
+					<div class="center-right-bottom" style="height: 25%">center-right-bottom</div>
+				</div>
 			</div>
-			<div class="center-center">
-				<div class="center-center-top" style="height: 12.5%">center-center-top</div>
-				<div class="center-center-center" style="height: 62.5%">center-center-center</div>
-				<div class="center-center-bottom" style="height: 25%">center-center-bottom</div>
-			</div>
-			<div class="center-right">
-				<div class="center-right-top" style="height: 25%">center-right-top</div>
-				<div class="center-right-center" style="height: 50%">center-right-center</div>
-				<div class="center-right-bottom" style="height: 25%">center-right-bottom</div>
-			</div>
+			<div class="bottom" :style="{ height: bottomHeight + 'px' }">footer</div>
 		</div>
-		<div class="bottom" :style="{ height: bottomHeight + 'px' }">footer</div>
 	</div>
 </template>
 
 <script>
 export default {
 	name: 'layout',
-	props: ['topHeight_p', 'bottomHeight_p'],
+	props: ['layoutStyle_p'],
 	data() {
 		return {
 			topHeight: 40,
 			centerHeight: 0,
-			bottomHeight: 40
+			bottomHeight: 40,
+			layoutStyle: {}
 		};
 	},
 	watch: {
-		topHeight_p() {
-			this.initHeight();
-		},
-		bottomHeight_p() {
-			this.initHeight();
+		layoutStyle_p: {
+			handler(newValue) {
+				console.log(newValue);
+				if (newValue.bgType === 2) {
+					this.bgColorStyleHandler(newValue);
+				}
+			},
+			deep: true
 		}
 	},
 	created() {
@@ -47,6 +53,35 @@ export default {
 	methods: {
 		initHeight() {
 			this.centerHeight = `calc(100vh - ${this.topHeight}px - ${this.bottomHeight}px )`;
+		},
+		colorStrHandler(value) {
+			const colorArr = [];
+			value.bgColorArr.forEach(color => {
+				colorArr.push(color.value);
+			});
+			return colorArr.join(',');
+		},
+		bgColorStyleHandler(value) {
+			const colorStr = this.colorStrHandler(value);
+			let tempParams = '';
+			if (value.gradientType === 'linear-gradient') {
+				tempParams = value.linearType;
+				this.$set(this.layoutStyle, 'background-position', '0px 0px');
+				this.$set(this.layoutStyle, 'background-repeat', 'no-repeat');
+			}
+			if (value.gradientType === 'radial-gradient') {
+				tempParams = value.radialShape;
+				let repeat = '';
+				this.$set(this.layoutStyle, 'background-position', value.dotPosition);
+				if (!value.isRepeat) {
+					repeat = 'no-repeat';
+				} else {
+					repeat = 'repeat';
+				}
+				this.$set(this.layoutStyle, 'background-repeat', repeat);
+			}
+
+			this.$set(this.layoutStyle, 'background-image', `${value.gradientType}(${tempParams}, ${colorStr})`);
 		}
 	}
 };

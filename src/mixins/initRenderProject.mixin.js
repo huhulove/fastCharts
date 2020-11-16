@@ -88,7 +88,7 @@ const initRenderProjectMixin = {
             }
             </style>`;
 			const componentJS = '<script>export default {data(){return{}}}</script>';
-			const templateContent = `<template><div class='layout'>${layoutDom.innerHTML}</div></template>\n\n${componentJS}\n\n${componentStyle}`;
+			const templateContent = `<template>${layoutDom.innerHTML}</template>\n\n${componentJS}\n\n${componentStyle}`;
 			this.writeFile(n_component, templateContent);
 		},
 		writeFile(path, content) {

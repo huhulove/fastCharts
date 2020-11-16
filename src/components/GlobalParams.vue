@@ -7,7 +7,7 @@
 					<el-option label="纯色" :value="2"></el-option>
 				</el-select>
 			</el-form-item>
-			<component :is="componentId"></component>
+			<component :is="componentId" v-bind="$attrs" v-on="$listeners"></component>
 		</el-form>
 	</el-drawer>
 </template>

@@ -1,8 +1,8 @@
 <template>
 	<div class="home" :class="themeColor">
-		<Layout ref="layout" :topHeight_p="topHeight" :bottomHeight_p="bottomHeight"></Layout>
+		<Layout ref="layout" :layoutStyle_p="layoutStyle"></Layout>
 		<SelectTheme :visible.sync="isShowSelectTheme" :theme.sync="theme"></SelectTheme>
-		<GlobalParams :visible.sync="isShowParamsDrawer" :topHeight_p.sync="topHeight" :bottomHeight_p.sync="bottomHeight"></GlobalParams>
+		<GlobalParams :visible.sync="isShowParamsDrawer" :layoutStyle_p.sync="layoutStyle"></GlobalParams>
 	</div>
 </template>
 
@@ -29,7 +29,8 @@ export default {
 			isShowParamsDrawer: false,
 			theme: null,
 			topHeight: null,
-			bottomHeight: null
+			bottomHeight: null,
+			layoutStyle: null
 		};
 	},
 	computed: {
