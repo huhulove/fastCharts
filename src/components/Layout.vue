@@ -43,6 +43,9 @@ export default {
 				if (newValue.bgType === 2) {
 					this.bgColorStyleHandler(newValue);
 				}
+				if (newValue.bgType === 1) {
+					this.bgImgStyleHandler(newValue);
+				}
 			},
 			deep: true
 		}
@@ -82,6 +85,11 @@ export default {
 			}
 
 			this.$set(this.layoutStyle, 'background-image', `${value.gradientType}(${tempParams}, ${colorStr})`);
+		},
+		bgImgStyleHandler(value) {
+			this.$set(this.layoutStyle, 'background-image', `url(${value.bgImg})`);
+			this.$set(this.layoutStyle, 'background-repeat', value.repeatType);
+			this.$set(this.layoutStyle, 'background-size', value.bgSize);
 		}
 	}
 };
@@ -95,7 +103,7 @@ export default {
 	text-align: center;
 	.top {
 		height: 20px;
-		background: #a11;
+		/* background: #a11; */
 		width: 100%;
 	}
 	.center {
@@ -108,15 +116,15 @@ export default {
 			height: 100%;
 			&-top {
 				width: 100%;
-				background: chartreuse;
+				/* background: chartreuse; */
 			}
 			&-center {
 				width: 100%;
-				background: cornflowerblue;
+				/* background: cornflowerblue; */
 			}
 			&-bottom {
 				width: 100%;
-				background: darkcyan;
+				/* background: darkcyan; */
 			}
 		}
 		&-center {
@@ -125,15 +133,15 @@ export default {
 			height: 100%;
 			&-top {
 				width: 100%;
-				background: #f0f;
+				/* background: #f0f; */
 			}
 			&-center {
 				width: 100%;
-				background: darkgreen;
+				/* background: darkgreen; */
 			}
 			&-bottom {
 				width: 100%;
-				background: darkorange;
+				/* background: darkorange; */
 			}
 		}
 		&-right {
@@ -142,21 +150,21 @@ export default {
 			height: 100%;
 			&-top {
 				width: 100%;
-				background: #aaa;
+				/* background: #aaa; */
 			}
 			&-center {
 				width: 100%;
-				background: deeppink;
+				/* background: deeppink; */
 			}
 			&-bottom {
 				width: 100%;
-				background: hotpink;
+				/* background: hotpink; */
 			}
 		}
 	}
 	.bottom {
 		height: 40px;
-		background: #0f0;
+		/* background: #0f0; */
 		width: 100%;
 	}
 }

@@ -9,7 +9,7 @@ const customMenu = win => {
 			submenu: [
 				{
 					// 添加快捷键
-					accelerator: 'alt+n',
+					accelerator: 'alt+e',
 					// 子标题
 					label: '导出',
 					// 子标题类型 type String
