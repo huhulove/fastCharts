@@ -14,6 +14,7 @@ const initRenderProjectMixin = {
 		createFile() {
 			const n_component = `${this.folderPath}/component.vue`;
 			const layoutDom = this.$refs.layout.$el;
+			console.log(this.$refs.layout);
 			const componentStyle = `<style scoped lang="less">
             .layout {
                 height: 100%;

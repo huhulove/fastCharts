@@ -42,7 +42,8 @@ export default {
 	watch: {
 		form: {
 			handler(newValue) {
-				this.$emit('update:layoutStyle_p', newValue);
+				const styleJson = this.bgImgStyleHandler(newValue);
+				this.$emit('update:layoutStyle_p', styleJson);
 			},
 			deep: true
 		}
@@ -54,6 +55,13 @@ export default {
 			reader.onload = e => {
 				this.form.bgImg = e.target.result;
 			};
+		},
+		bgImgStyleHandler(value) {
+			const styleJson = {};
+			styleJson['background-image'] = `url(${value.bgImg})`;
+			styleJson['background-repeat'] = value.repeatType;
+			styleJson['background-size'] = value.bgSize;
+			return styleJson;
 		}
 	}
 };

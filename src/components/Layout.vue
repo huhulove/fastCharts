@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="layout" :style="layoutStyle">
-			<div class="top" :style="{ height: topHeight + 'px' }">logo</div>
+			<div class="top" :style="componentStyle.top.style">{{ componentStyle.top.content }}</div>
 			<div class="center" :style="{ height: centerHeight }">
 				<div class="center-left">
 					<div class="center-left-top" style="height: 25%">center-left-top</div>
@@ -27,25 +27,32 @@
 <script>
 export default {
 	name: 'layout',
-	props: ['layoutStyle_p'],
+	props: ['layoutStyle_p', 'componentStyle_p'],
 	data() {
 		return {
 			topHeight: 40,
 			centerHeight: 0,
 			bottomHeight: 40,
-			layoutStyle: {}
+			layoutStyle: {},
+			componentStyle: {
+				top: {
+					style: null,
+					content: null
+				}
+			}
 		};
 	},
 	watch: {
 		layoutStyle_p: {
 			handler(newValue) {
+				this.layoutStyle = newValue;
+			},
+			deep: true
+		},
+		componentStyle_p: {
+			handler(newValue) {
 				console.log(newValue);
-				if (newValue.bgType === 2) {
-					this.bgColorStyleHandler(newValue);
-				}
-				if (newValue.bgType === 1) {
-					this.bgImgStyleHandler(newValue);
-				}
+				this.componentStyle = newValue;
 			},
 			deep: true
 		}
@@ -56,40 +63,6 @@ export default {
 	methods: {
 		initHeight() {
 			this.centerHeight = `calc(100vh - ${this.topHeight}px - ${this.bottomHeight}px )`;
-		},
-		colorStrHandler(value) {
-			const colorArr = [];
-			value.bgColorArr.forEach(color => {
-				colorArr.push(color.value);
-			});
-			return colorArr.join(',');
-		},
-		bgColorStyleHandler(value) {
-			const colorStr = this.colorStrHandler(value);
-			let tempParams = '';
-			if (value.gradientType === 'linear-gradient') {
-				tempParams = value.linearType;
-				this.$set(this.layoutStyle, 'background-position', '0px 0px');
-				this.$set(this.layoutStyle, 'background-repeat', 'no-repeat');
-			}
-			if (value.gradientType === 'radial-gradient') {
-				tempParams = value.radialShape;
-				let repeat = '';
-				this.$set(this.layoutStyle, 'background-position', value.dotPosition);
-				if (!value.isRepeat) {
-					repeat = 'no-repeat';
-				} else {
-					repeat = 'repeat';
-				}
-				this.$set(this.layoutStyle, 'background-repeat', repeat);
-			}
-
-			this.$set(this.layoutStyle, 'background-image', `${value.gradientType}(${tempParams}, ${colorStr})`);
-		},
-		bgImgStyleHandler(value) {
-			this.$set(this.layoutStyle, 'background-image', `url(${value.bgImg})`);
-			this.$set(this.layoutStyle, 'background-repeat', value.repeatType);
-			this.$set(this.layoutStyle, 'background-size', value.bgSize);
 		}
 	}
 };

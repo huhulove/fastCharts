@@ -39,12 +39,12 @@
 			<template v-for="(color, index) in form.bgColorArr">
 				<div :key="index" class="color-group">
 					<el-color-picker v-model="color.value" class="colorPicker-item" show-alpha></el-color-picker>
-					<el-button type="primary" circle class="colorIcon-item" @click="colorDel(index)">
+					<el-button type="primary" circle class="colorIcon-item" @click="colorDelHandler(index)">
 						<i class="el-icon-remove-outline"></i>
 					</el-button>
 				</div>
 			</template>
-			<el-button class="button-add" @click="colorAdd">
+			<el-button class="button-add" @click="colorAddHandler">
 				<i class="el-icon-plus"></i>
 			</el-button>
 		</el-form-item>
@@ -75,24 +75,56 @@ export default {
 	watch: {
 		form: {
 			handler(newValue) {
-				this.$emit('update:layoutStyle_p', newValue);
+				const styleJson = this.bgColorStyleHandler(newValue);
+				this.$emit('update:layoutStyle_p', styleJson);
 			},
 			deep: true
 		}
 	},
 	methods: {
 		// 添加背景色
-		colorAdd() {
+		colorAddHandler() {
 			this.form.bgColorArr.push({
 				value: 'rgba(19, 206, 102, 0.8)'
 			});
 		},
 		// 删除背景色
-		colorDel(index) {
+		colorDelHandler(index) {
 			if (this.form.bgColorArr.length === 2 && (index === 0 || index === 1)) {
 				return false;
 			}
 			this.form.bgColorArr.splice(index, 1);
+		},
+		// 颜色数组转换为颜色字符串
+		colorStrHandler(value) {
+			const colorArr = [];
+			value.bgColorArr.forEach(color => {
+				colorArr.push(color.value);
+			});
+			return colorArr.join(',');
+		},
+		bgColorStyleHandler(value) {
+			const colorStr = this.colorStrHandler(value);
+			const styleJson = {};
+			let tempParams = '';
+			if (value.gradientType === 'linear-gradient') {
+				tempParams = value.linearType;
+				styleJson['background-position'] = '0px 0px';
+				styleJson['background-repeat'] = 'no-repeat';
+			}
+			if (value.gradientType === 'radial-gradient') {
+				tempParams = value.radialShape;
+				let repeat = '';
+				styleJson['background-position'] = value.dotPosition;
+				if (!value.isRepeat) {
+					repeat = 'no-repeat';
+				} else {
+					repeat = 'repeat';
+				}
+				styleJson['background-repeat'] = repeat;
+			}
+			styleJson['background-image'] = `${value.gradientType}(${tempParams}, ${colorStr})`;
+			return styleJson;
 		}
 	}
 };

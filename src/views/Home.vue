@@ -1,8 +1,9 @@
 <template>
 	<div class="home" :class="themeColor">
-		<Layout ref="layout" :layoutStyle_p="layoutStyle"></Layout>
+		<Layout ref="layout" :layoutStyle_p="layoutStyle" :componentStyle_p="componentStyle"></Layout>
 		<SelectTheme :visible.sync="isShowSelectTheme" :theme.sync="theme"></SelectTheme>
 		<GlobalParams :visible.sync="isShowParamsDrawer" :layoutStyle_p.sync="layoutStyle"></GlobalParams>
+		<MaskSet :componentStyle_p.sync="componentStyle"></MaskSet>
 	</div>
 </template>
 
@@ -11,6 +12,7 @@
 import Layout from '@/components/Layout.vue';
 import SelectTheme from '@/components/SelectTheme.vue';
 import GlobalParams from '@/components/GlobalParams.vue';
+import MaskSet from '@/components/MaskSet.vue';
 import initRenderProjectMixin from '@/mixins/initRenderProject.mixin.js';
 
 const { dialog } = window.require('electron').remote;
@@ -21,7 +23,8 @@ export default {
 	components: {
 		Layout,
 		SelectTheme,
-		GlobalParams
+		GlobalParams,
+		MaskSet
 	},
 	data() {
 		return {
@@ -30,7 +33,8 @@ export default {
 			theme: null,
 			topHeight: null,
 			bottomHeight: null,
-			layoutStyle: null
+			layoutStyle: null,
+			componentStyle: null
 		};
 	},
 	computed: {
