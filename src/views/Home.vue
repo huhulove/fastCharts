@@ -1,19 +1,19 @@
 <template>
 	<div class="home" :class="themeColor">
-		<Layout ref="layout" :layoutStyle_p="layoutStyle" :componentStyle_p="componentStyle"></Layout>
+		<Layout ref="layout" :layoutStyle_p="layoutStyle" :allComponentStyle_p="allComponentStyle"></Layout>
 		<SelectTheme :visible.sync="isShowSelectTheme" :theme.sync="theme"></SelectTheme>
-		<GlobalParams :visible.sync="isShowParamsDrawer" :layoutStyle_p.sync="layoutStyle"></GlobalParams>
-		<MaskSet :componentStyle_p.sync="componentStyle"></MaskSet>
+		<PageStyle :visible.sync="isShowParamsDrawer" :layoutStyle_p.sync="layoutStyle"></PageStyle>
+		<MaskSet :allComponentStyle_p.sync="allComponentStyle"></MaskSet>
 	</div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Layout from '@/components/Layout.vue';
 import SelectTheme from '@/components/SelectTheme.vue';
-import GlobalParams from '@/components/GlobalParams.vue';
-import MaskSet from '@/components/MaskSet.vue';
+import PageStyle from '@/factory/PageStyle.vue';
 import initRenderProjectMixin from '@/mixins/initRenderProject.mixin.js';
+import Layout from './Layout.vue';
+import MaskSet from './MaskSet.vue';
 
 const { dialog } = window.require('electron').remote;
 
@@ -23,7 +23,7 @@ export default {
 	components: {
 		Layout,
 		SelectTheme,
-		GlobalParams,
+		PageStyle,
 		MaskSet
 	},
 	data() {
@@ -34,7 +34,7 @@ export default {
 			topHeight: null,
 			bottomHeight: null,
 			layoutStyle: null,
-			componentStyle: null
+			allComponentStyle: null
 		};
 	},
 	computed: {

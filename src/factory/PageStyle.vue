@@ -14,8 +14,8 @@
 
 <script>
 import initRenderProjectMixin from '@/mixins/initRenderProject.mixin.js';
-import BgImgComponent from './globalParams/BgImg.globalParams';
-import BgColorComponent from './globalParams/BgColor.globalParams';
+import BgImgComponent from '@/components/BgImg.globalParams';
+import BgColorComponent from '@/components/BgColor.globalParams';
 
 export default {
 	inheritAttrs: false,

@@ -1,7 +1,9 @@
 <template>
 	<div>
 		<div class="layout" :style="layoutStyle">
-			<div class="top" :style="componentStyle.top.style">{{ componentStyle.top.content }}</div>
+			<div class="top" :style="allComponentStyle.top.style">
+				<div :style="allComponentStyle.top.content.style">{{ allComponentStyle.top.content.text }}</div>
+			</div>
 			<div class="center" :style="{ height: centerHeight }">
 				<div class="center-left">
 					<div class="center-left-top" style="height: 25%">center-left-top</div>
@@ -27,17 +29,20 @@
 <script>
 export default {
 	name: 'layout',
-	props: ['layoutStyle_p', 'componentStyle_p'],
+	props: ['layoutStyle_p', 'allComponentStyle_p'],
 	data() {
 		return {
 			topHeight: 40,
 			centerHeight: 0,
 			bottomHeight: 40,
 			layoutStyle: {},
-			componentStyle: {
+			allComponentStyle: {
 				top: {
 					style: null,
-					content: null
+					content: {
+						style: null,
+						text: null
+					}
 				}
 			}
 		};
@@ -49,10 +54,10 @@ export default {
 			},
 			deep: true
 		},
-		componentStyle_p: {
+		allComponentStyle_p: {
 			handler(newValue) {
 				console.log(newValue);
-				this.componentStyle = newValue;
+				this.allComponentStyle = newValue;
 			},
 			deep: true
 		}

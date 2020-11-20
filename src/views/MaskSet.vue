@@ -1,6 +1,6 @@
 <template>
 	<div class="global-mask">
-		<div class="top" :style="componentStyle.top.style">
+		<div class="top" :style="allComponentStyle.top.style">
 			<div class="icon-group">
 				<i class="el-icon-setting" @click="topSetVueHandler"></i>
 			</div>
@@ -23,16 +23,16 @@
 			</div>
 		</div>
 		<div class="bottom" :style="{ height: bottomHeight + 'px' }">footer</div>
-		<TopSet :visible.sync="isShowTopSet" :layoutStyle_p.sync="layoutStyle"></TopSet>
+		<Hdialog :visible.sync="isShowTopSet" :componentStyle_p.sync="componentStyle" :componentContent_p.sync="componentContent"></Hdialog>
 	</div>
 </template>
 
 <script>
-import TopSet from './maskSet/TopSet';
+import Hdialog from '../factory/Hdialog';
 
 export default {
 	components: {
-		TopSet
+		Hdialog
 	},
 	data() {
 		return {
@@ -40,29 +40,33 @@ export default {
 			bottomHeight: 40,
 
 			isShowTopSet: false,
-			layoutStyle: null,
-			componentStyle: {
+			componentStyle: null,
+			componentContent: null,
+			allComponentStyle: {
 				top: {
 					style: {},
-					content: 'a2222sdf'
+					content: null
 				}
 			}
 		};
 	},
 	watch: {
-		componentStyle: {
+		allComponentStyle: {
 			handler(newValue) {
-				this.$emit('update:componentStyle_p', newValue);
+				this.$emit('update:allComponentStyle_p', newValue);
 			},
 			deep: true
 		},
-		layoutStyle: {
+		componentStyle: {
 			handler(newValue) {
-				this.componentStyle.top.style = {
-					...this.componentStyle.top.style,
-					...newValue
-				};
+				this.allComponentStyle.top.style = newValue;
 				this.initHeight();
+			},
+			deep: true
+		},
+		componentContent: {
+			handler(newValue) {
+				this.allComponentStyle.top.content = newValue;
 			},
 			deep: true
 		}
@@ -73,7 +77,7 @@ export default {
 	methods: {
 		// 初始化中间高度
 		initHeight() {
-			this.centerHeight = `calc(100vh - ${this.componentStyle.top.style.height} - ${this.bottomHeight}px )`;
+			this.centerHeight = `calc(100vh - ${this.allComponentStyle.top.style.height} - ${this.bottomHeight}px )`;
 		},
 		// 显示顶部设置框
 		topSetVueHandler() {
@@ -93,6 +97,7 @@ export default {
 	height: 100%;
 	.top {
 		/* background: #a11; */
+		background: none !important;
 		width: 100%;
 		position: relative;
 		.icon-group {
