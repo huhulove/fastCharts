@@ -1,21 +1,26 @@
 <template>
 	<el-form :model="form" class="form" label-width="100px">
-		<el-form-item label="内容">
+		<el-form-item label="类型">
 			<el-select v-model="form.type" placeholder="请选择" class="select-item">
 				<el-option label="文本" :value="1"></el-option>
 				<el-option label="图表" :value="2"></el-option>
 			</el-select>
 		</el-form-item>
+		<template>
+			<ContentTextComponent v-if="form.type === 1" :contentText_p.sync="form.text"></ContentTextComponent>
+		</template>
 		<ContentStyleComponent :contentStyle_p.sync="form.style"></ContentStyleComponent>
 	</el-form>
 </template>
 
 <script>
-import ContentStyleComponent from '@/components/ContentStyle.globalParams';
+import ContentStyleComponent from '@/components/ContentStyle';
+import ContentTextComponent from '@/components/ContentText';
 
 export default {
 	components: {
-		ContentStyleComponent
+		ContentStyleComponent,
+		ContentTextComponent
 	},
 	data() {
 		return {

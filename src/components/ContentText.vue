@@ -1,9 +1,9 @@
 <template>
 	<div>
-		<el-divider content-position="left">样式</el-divider>
+		<el-divider content-position="left">内容</el-divider>
 		<el-form :model="form" class="form" label-width="100px">
-			<el-form-item label="颜色">
-				<el-color-picker v-model="form.color"></el-color-picker>
+			<el-form-item label="文本">
+				<el-input class="input-item" v-model="form.text" placeholder="请输入文本"></el-input>
 			</el-form-item>
 		</el-form>
 	</div>
@@ -14,14 +14,14 @@ export default {
 	data() {
 		return {
 			form: {
-				color: '#409EFF'
+				text: null
 			}
 		};
 	},
 	watch: {
 		form: {
 			handler(newValue) {
-				this.$emit('update:contentStyle_p', newValue);
+				this.$emit('update:contentText_p', newValue.text);
 			},
 			deep: true
 		}

@@ -2,7 +2,7 @@
 	<div class="global-mask">
 		<div class="top" :style="allComponentStyle.top.style">
 			<div class="icon-group">
-				<i class="el-icon-setting" @click="topSetVueHandler"></i>
+				<i class="el-icon-setting" @click="showHdialogHandler('top')"></i>
 			</div>
 		</div>
 		<div class="center" :style="{ height: centerHeight }">
@@ -22,8 +22,18 @@
 				<div class="center-right-bottom" style="height: 25%">center-right-bottom</div>
 			</div>
 		</div>
-		<div class="bottom" :style="{ height: bottomHeight + 'px' }">footer</div>
-		<Hdialog :visible.sync="isShowTopSet" :componentStyle_p.sync="componentStyle" :componentContent_p.sync="componentContent"></Hdialog>
+		<div class="bottom" :style="allComponentStyle.bottom.style">
+			<div class="icon-group">
+				<i class="el-icon-setting" @click="showHdialogHandler('bottom')"></i>
+			</div>
+		</div>
+		<Hdialog
+			:visible.sync="isShowHdialog"
+			:componentStyle_p.sync="componentStyle"
+			:componentContent_p.sync="componentContent"
+			:componentPos_p.sync="componentPos"
+			v-if="isShowHdialog"
+		></Hdialog>
 	</div>
 </template>
 
@@ -37,15 +47,32 @@ export default {
 	data() {
 		return {
 			centerHeight: 0,
-			bottomHeight: 40,
 
-			isShowTopSet: false,
+			isShowHdialog: false,
 			componentStyle: null,
 			componentContent: null,
+			componentPos: null,
+
 			allComponentStyle: {
 				top: {
-					style: {},
-					content: null
+					style: {
+						height: '40px',
+						bgType: null
+					},
+					content: {
+						style: {},
+						text: null
+					}
+				},
+				bottom: {
+					style: {
+						height: '40px',
+						bgType: null
+					},
+					content: {
+						style: {},
+						text: null
+					}
 				}
 			}
 		};
@@ -55,18 +82,23 @@ export default {
 			handler(newValue) {
 				this.$emit('update:allComponentStyle_p', newValue);
 			},
-			deep: true
+			deep: true,
+			immediate: true
 		},
 		componentStyle: {
 			handler(newValue) {
-				this.allComponentStyle.top.style = newValue;
-				this.initHeight();
+				if (newValue) {
+					this.allComponentStyle[this.componentPos].style = newValue;
+					this.initHeight();
+				}
 			},
 			deep: true
 		},
 		componentContent: {
 			handler(newValue) {
-				this.allComponentStyle.top.content = newValue;
+				if (newValue) {
+					this.allComponentStyle[this.componentPos].content = newValue;
+				}
 			},
 			deep: true
 		}
@@ -77,11 +109,17 @@ export default {
 	methods: {
 		// 初始化中间高度
 		initHeight() {
-			this.centerHeight = `calc(100vh - ${this.allComponentStyle.top.style.height} - ${this.bottomHeight}px )`;
+			this.centerHeight = `calc(100vh - ${this.allComponentStyle.top.style.height} - ${this.allComponentStyle.bottom.style.height} )`;
 		},
 		// 显示顶部设置框
-		topSetVueHandler() {
-			this.isShowTopSet = true;
+		showHdialogHandler(pos) {
+			this.componentPos = pos;
+			this.isShowHdialog = true;
+
+			console.log(this.componentPos);
+			this.componentStyle = this.allComponentStyle[this.componentPos].style;
+			this.componentContent = this.allComponentStyle[this.componentPos].content;
+			console.log(this.componentStyle);
 		}
 	}
 };
@@ -165,9 +203,17 @@ export default {
 		}
 	}
 	.bottom {
-		height: 40px;
-		background: #0f0;
+		/* background: #0f0; */
+		background: none !important;
 		width: 100%;
+		position: relative;
+		.icon-group {
+			position: absolute;
+			top: 6px;
+			right: 10px;
+			cursor: pointer;
+			color: #fff;
+		}
 	}
 }
 </style>

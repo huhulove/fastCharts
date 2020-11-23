@@ -21,7 +21,9 @@
 					<div class="center-right-bottom" style="height: 25%">center-right-bottom</div>
 				</div>
 			</div>
-			<div class="bottom" :style="{ height: bottomHeight + 'px' }">footer</div>
+			<div class="bottom" :style="allComponentStyle.bottom.style">
+				<div :style="allComponentStyle.bottom.content.style">{{ allComponentStyle.bottom.content.text }}</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -32,15 +34,25 @@ export default {
 	props: ['layoutStyle_p', 'allComponentStyle_p'],
 	data() {
 		return {
-			topHeight: 40,
 			centerHeight: 0,
 			bottomHeight: 40,
 			layoutStyle: {},
 			allComponentStyle: {
 				top: {
-					style: null,
+					style: {
+						height: 0
+					},
 					content: {
-						style: null,
+						style: {},
+						text: null
+					}
+				},
+				bottom: {
+					style: {
+						height: 0
+					},
+					content: {
+						style: {},
 						text: null
 					}
 				}
@@ -58,6 +70,7 @@ export default {
 			handler(newValue) {
 				console.log(newValue);
 				this.allComponentStyle = newValue;
+				this.initHeight();
 			},
 			deep: true
 		}
@@ -67,7 +80,7 @@ export default {
 	},
 	methods: {
 		initHeight() {
-			this.centerHeight = `calc(100vh - ${this.topHeight}px - ${this.bottomHeight}px )`;
+			this.centerHeight = `calc(100vh - ${this.allComponentStyle.top.style.height} - ${this.allComponentStyle.bottom.style.height} )`;
 		}
 	}
 };

@@ -16,15 +16,16 @@
 </template>
 
 <script>
-import BgImgComponent from '@/components/BgImg.globalParams';
-import BgColorComponent from '@/components/BgColor.globalParams';
+import BgImgComponent from '@/components/BgImg';
+import BgColorComponent from '@/components/BgColor';
 
 export default {
+	props: ['componentStyle_p'],
 	data() {
 		return {
 			componentId: null,
 			form: {
-				height: '40px',
+				height: 0,
 				bgType: null
 			},
 			layoutStyle: {}
@@ -33,7 +34,8 @@ export default {
 	watch: {
 		form: {
 			handler(newValue) {
-				this.$emit('update:componentStyle_p', { ...newValue, ...this.layoutStyle });
+				console.log(newValue);
+				this.$emit('update:componentStyle_p', { ...this.layoutStyle, ...newValue });
 			},
 			deep: true
 		},
@@ -45,7 +47,8 @@ export default {
 		}
 	},
 	created() {
-		this.$emit('update:componentStyle_p', { ...this.form, ...this.layoutStyle });
+		this.form = { ...this.componentStyle_p };
+		this.layoutStyle = { ...this.componentStyle_p };
 	},
 	methods: {
 		bgTypeChange(type) {
