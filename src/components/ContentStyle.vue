@@ -23,6 +23,7 @@
 
 <script>
 export default {
+	props: ['contentStyle_p'],
 	data() {
 		return {
 			form: {
@@ -38,6 +39,12 @@ export default {
 				this.$emit('update:contentStyle_p', newValue);
 			},
 			deep: true
+		}
+	},
+	created() {
+		// 回绑数据
+		if (this.contentStyle_p) {
+			this.form = { ...this.contentStyle_p };
 		}
 	}
 };

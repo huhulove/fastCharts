@@ -6,19 +6,37 @@
 			</div>
 			<div class="center" :style="{ height: centerHeight }">
 				<div class="center-left">
-					<div class="center-left-top" style="height: 25%">center-left-top</div>
-					<div class="center-left-center" style="height: 25%">center-left-center</div>
-					<div class="center-left-bottom" style="height: 50%">center-left-bottom</div>
+					<div class="center-left-top" :style="allComponentStyle.centerLeftTop.style">
+						<div :style="allComponentStyle.centerLeftTop.content.style">{{ allComponentStyle.centerLeftTop.content.text }}</div>
+					</div>
+					<div class="center-left-center" :style="allComponentStyle.centerLeftCenter.style">
+						<div :style="allComponentStyle.centerLeftCenter.content.style">{{ allComponentStyle.centerLeftCenter.content.text }}</div>
+					</div>
+					<div class="center-left-bottom" :style="allComponentStyle.centerLeftBottom.style">
+						<div :style="allComponentStyle.centerLeftBottom.content.style">{{ allComponentStyle.centerLeftBottom.content.text }}</div>
+					</div>
 				</div>
 				<div class="center-center">
-					<div class="center-center-top" style="height: 12.5%">center-center-top</div>
-					<div class="center-center-center" style="height: 62.5%">center-center-center</div>
-					<div class="center-center-bottom" style="height: 25%">center-center-bottom</div>
+					<div class="center-center-top" :style="allComponentStyle.centerCenterTop.style">
+						<div :style="allComponentStyle.centerCenterTop.content.style">{{ allComponentStyle.centerCenterTop.content.text }}</div>
+					</div>
+					<div class="center-center-center" :style="allComponentStyle.centerCenterCenter.style">
+						<div :style="allComponentStyle.centerCenterCenter.content.style">{{ allComponentStyle.centerCenterCenter.content.text }}</div>
+					</div>
+					<div class="center-center-bottom" :style="allComponentStyle.centerCenterBottom.style">
+						<div :style="allComponentStyle.centerCenterBottom.content.style">{{ allComponentStyle.centerCenterBottom.content.text }}</div>
+					</div>
 				</div>
 				<div class="center-right">
-					<div class="center-right-top" style="height: 25%">center-right-top</div>
-					<div class="center-right-center" style="height: 50%">center-right-center</div>
-					<div class="center-right-bottom" style="height: 25%">center-right-bottom</div>
+					<div class="center-right-top" :style="allComponentStyle.centerRightTop.style">
+						<div :style="allComponentStyle.centerRightTop.content.style">{{ allComponentStyle.centerRightTop.content.text }}</div>
+					</div>
+					<div class="center-right-center" :style="allComponentStyle.centerRightCenter.style">
+						<div :style="allComponentStyle.centerRightCenter.content.style">{{ allComponentStyle.centerRightCenter.content.text }}</div>
+					</div>
+					<div class="center-right-bottom" :style="allComponentStyle.centerRightBottom.style">
+						<div :style="allComponentStyle.centerRightBottom.content.style">{{ allComponentStyle.centerRightBottom.content.text }}</div>
+					</div>
 				</div>
 			</div>
 			<div class="bottom" :style="allComponentStyle.bottom.style">
@@ -39,6 +57,87 @@ export default {
 			layoutStyle: {},
 			allComponentStyle: {
 				top: {
+					style: {
+						height: 0
+					},
+					content: {
+						style: {},
+						text: null
+					}
+				},
+				centerLeftTop: {
+					style: {
+						height: 0
+					},
+					content: {
+						style: {},
+						text: null
+					}
+				},
+				centerLeftCenter: {
+					style: {
+						height: 0
+					},
+					content: {
+						style: {},
+						text: null
+					}
+				},
+				centerLeftBottom: {
+					style: {
+						height: 0
+					},
+					content: {
+						style: {},
+						text: null
+					}
+				},
+				centerCenterTop: {
+					style: {
+						height: 0
+					},
+					content: {
+						style: {},
+						text: null
+					}
+				},
+				centerCenterCenter: {
+					style: {
+						height: 0
+					},
+					content: {
+						style: {},
+						text: null
+					}
+				},
+				centerCenterBottom: {
+					style: {
+						height: 0
+					},
+					content: {
+						style: {},
+						text: null
+					}
+				},
+				centerRightTop: {
+					style: {
+						height: 0
+					},
+					content: {
+						style: {},
+						text: null
+					}
+				},
+				centerRightCenter: {
+					style: {
+						height: 0
+					},
+					content: {
+						style: {},
+						text: null
+					}
+				},
+				centerRightBottom: {
 					style: {
 						height: 0
 					},
@@ -94,7 +193,7 @@ export default {
 	text-align: center;
 	.top {
 		height: 20px;
-		/* background: #a11; */
+		background: #a11;
 		width: 100%;
 	}
 	.center {
@@ -107,15 +206,15 @@ export default {
 			height: 100%;
 			&-top {
 				width: 100%;
-				/* background: chartreuse; */
+				background: chartreuse;
 			}
 			&-center {
 				width: 100%;
-				/* background: cornflowerblue; */
+				background: cornflowerblue;
 			}
 			&-bottom {
 				width: 100%;
-				/* background: darkcyan; */
+				background: darkcyan;
 			}
 		}
 		&-center {
@@ -124,15 +223,15 @@ export default {
 			height: 100%;
 			&-top {
 				width: 100%;
-				/* background: #f0f; */
+				background: #f0f;
 			}
 			&-center {
 				width: 100%;
-				/* background: darkgreen; */
+				background: darkgreen;
 			}
 			&-bottom {
 				width: 100%;
-				/* background: darkorange; */
+				background: darkorange;
 			}
 		}
 		&-right {
@@ -141,21 +240,21 @@ export default {
 			height: 100%;
 			&-top {
 				width: 100%;
-				/* background: #aaa; */
+				background: #aaa;
 			}
 			&-center {
 				width: 100%;
-				/* background: deeppink; */
+				background: deeppink;
 			}
 			&-bottom {
 				width: 100%;
-				/* background: hotpink; */
+				background: hotpink;
 			}
 		}
 	}
 	.bottom {
 		height: 40px;
-		/* background: #0f0; */
+		background: #0f0;
 		width: 100%;
 	}
 }

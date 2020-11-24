@@ -11,6 +11,7 @@
 
 <script>
 export default {
+	props: ['contentText_p'],
 	data() {
 		return {
 			form: {
@@ -24,6 +25,14 @@ export default {
 				this.$emit('update:contentText_p', newValue.text);
 			},
 			deep: true
+		}
+	},
+	created() {
+		// 回绑数据
+		if (this.contentText_p) {
+			this.form = {
+				text: this.contentText_p
+			};
 		}
 	}
 };

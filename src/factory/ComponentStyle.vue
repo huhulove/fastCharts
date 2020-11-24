@@ -6,12 +6,15 @@
 			</el-tooltip>
 		</el-form-item>
 		<el-form-item label="背景">
-			<el-select v-model="form.bgType" placeholder="请选择" class="select-item" @change="bgTypeChange">
+			<el-select v-model="form.bgType" placeholder="请选择" class="select-item">
 				<el-option label="图片" :value="1"></el-option>
 				<el-option label="纯色" :value="2"></el-option>
 			</el-select>
 		</el-form-item>
-		<component :is="componentId" :layoutStyle_p.sync="layoutStyle"></component>
+		<template>
+			<BgImgComponent v-if="form.bgType === 1" :layoutStyle_p.sync="layoutStyle"></BgImgComponent>
+			<BgColorComponent v-if="form.bgType === 2" :layoutStyle_p.sync="layoutStyle"></BgColorComponent>
+		</template>
 	</el-form>
 </template>
 
@@ -21,9 +24,12 @@ import BgColorComponent from '@/components/BgColor';
 
 export default {
 	props: ['componentStyle_p'],
+	components: {
+		BgImgComponent,
+		BgColorComponent
+	},
 	data() {
 		return {
-			componentId: null,
 			form: {
 				height: 0,
 				bgType: null
@@ -34,32 +40,23 @@ export default {
 	watch: {
 		form: {
 			handler(newValue) {
-				console.log(newValue);
 				this.$emit('update:componentStyle_p', { ...this.layoutStyle, ...newValue });
 			},
 			deep: true
 		},
 		layoutStyle: {
 			handler(newValue) {
-				this.$emit('update:componentStyle_p', { ...newValue, ...this.form });
+				this.$emit('update:componentStyle_p', { ...this.form, ...newValue });
 			},
 			deep: true
 		}
 	},
 	created() {
+		// 回绑数据
 		this.form = { ...this.componentStyle_p };
 		this.layoutStyle = { ...this.componentStyle_p };
 	},
-	methods: {
-		bgTypeChange(type) {
-			if (type === 1) {
-				this.componentId = BgImgComponent;
-			}
-			if (type === 2) {
-				this.componentId = BgColorComponent;
-			}
-		}
-	}
+	methods: {}
 };
 </script>
 

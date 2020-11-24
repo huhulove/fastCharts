@@ -29,12 +29,13 @@
 <script>
 export default {
 	name: 'BgImgComponent',
+	props: ['layoutStyle_p'],
 	data() {
 		return {
 			form: {
 				bgType: 1,
-				repeatType: null,
-				bgSize: null,
+				repeatType: 'no-repeat',
+				bgSize: 'cover',
 				bgImg: null
 			}
 		};
@@ -46,6 +47,24 @@ export default {
 				this.$emit('update:layoutStyle_p', styleJson);
 			},
 			deep: true
+		}
+	},
+	created() {
+		// 回绑数据
+		for (const key in this.layoutStyle_p) {
+			const item = this.layoutStyle_p[key];
+			if (key === 'background-image') {
+				const imageBase64Old = item;
+				const imageBase64New = imageBase64Old.replace('url(', '');
+				const imageBase64 = imageBase64New.slice(0, imageBase64New.length - 1);
+				this.form.bgImg = imageBase64;
+			}
+			if (key === 'background-size') {
+				this.form.bgSize = item;
+			}
+			if (key === 'background-repeat') {
+				this.form.repeatType = item;
+			}
 		}
 	},
 	methods: {

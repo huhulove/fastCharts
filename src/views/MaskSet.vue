@@ -7,19 +7,55 @@
 		</div>
 		<div class="center" :style="{ height: centerHeight }">
 			<div class="center-left">
-				<div class="center-left-top" style="height: 25%">center-left-top</div>
-				<div class="center-left-center" style="height: 25%">center-left-center</div>
-				<div class="center-left-bottom" style="height: 50%">center-left-bottom</div>
+				<div class="center-left-top" :style="allComponentStyle.centerLeftTop.style">
+					<div class="icon-group">
+						<i class="el-icon-setting" @click="showHdialogHandler('centerLeftTop')"></i>
+					</div>
+				</div>
+				<div class="center-left-center" :style="allComponentStyle.centerLeftCenter.style">
+					<div class="icon-group">
+						<i class="el-icon-setting" @click="showHdialogHandler('centerLeftCenter')"></i>
+					</div>
+				</div>
+				<div class="center-left-bottom" :style="allComponentStyle.centerLeftBottom.style">
+					<div class="icon-group">
+						<i class="el-icon-setting" @click="showHdialogHandler('centerLeftBottom')"></i>
+					</div>
+				</div>
 			</div>
 			<div class="center-center">
-				<div class="center-center-top" style="height: 12.5%">center-center-top</div>
-				<div class="center-center-center" style="height: 62.5%">center-center-center</div>
-				<div class="center-center-bottom" style="height: 25%">center-center-bottom</div>
+				<div class="center-center-top" :style="allComponentStyle.centerCenterTop.style">
+					<div class="icon-group">
+						<i class="el-icon-setting" @click="showHdialogHandler('centerCenterTop')"></i>
+					</div>
+				</div>
+				<div class="center-center-center" :style="allComponentStyle.centerCenterCenter.style">
+					<div class="icon-group">
+						<i class="el-icon-setting" @click="showHdialogHandler('centerCenterCenter')"></i>
+					</div>
+				</div>
+				<div class="center-center-bottom" :style="allComponentStyle.centerCenterBottom.style">
+					<div class="icon-group">
+						<i class="el-icon-setting" @click="showHdialogHandler('centerCenterBottom')"></i>
+					</div>
+				</div>
 			</div>
 			<div class="center-right">
-				<div class="center-right-top" style="height: 25%">center-right-top</div>
-				<div class="center-right-center" style="height: 50%">center-right-center</div>
-				<div class="center-right-bottom" style="height: 25%">center-right-bottom</div>
+				<div class="center-right-top" :style="allComponentStyle.centerRightTop.style">
+					<div class="icon-group">
+						<i class="el-icon-setting" @click="showHdialogHandler('centerRightTop')"></i>
+					</div>
+				</div>
+				<div class="center-right-center" :style="allComponentStyle.centerRightCenter.style">
+					<div class="icon-group">
+						<i class="el-icon-setting" @click="showHdialogHandler('centerRightCenter')"></i>
+					</div>
+				</div>
+				<div class="center-right-bottom" :style="allComponentStyle.centerRightBottom.style">
+					<div class="icon-group">
+						<i class="el-icon-setting" @click="showHdialogHandler('centerRightBottom')"></i>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="bottom" :style="allComponentStyle.bottom.style">
@@ -58,6 +94,87 @@ export default {
 					style: {
 						height: '40px',
 						bgType: null
+					},
+					content: {
+						style: {},
+						text: null
+					}
+				},
+				centerLeftTop: {
+					style: {
+						height: '25%'
+					},
+					content: {
+						style: {},
+						text: null
+					}
+				},
+				centerLeftCenter: {
+					style: {
+						height: '25%'
+					},
+					content: {
+						style: {},
+						text: null
+					}
+				},
+				centerLeftBottom: {
+					style: {
+						height: '50%'
+					},
+					content: {
+						style: {},
+						text: null
+					}
+				},
+				centerCenterTop: {
+					style: {
+						height: '12.5%'
+					},
+					content: {
+						style: {},
+						text: null
+					}
+				},
+				centerCenterCenter: {
+					style: {
+						height: '62.5%'
+					},
+					content: {
+						style: {},
+						text: null
+					}
+				},
+				centerCenterBottom: {
+					style: {
+						height: '25%'
+					},
+					content: {
+						style: {},
+						text: null
+					}
+				},
+				centerRightTop: {
+					style: {
+						height: '25%'
+					},
+					content: {
+						style: {},
+						text: null
+					}
+				},
+				centerRightCenter: {
+					style: {
+						height: '50%'
+					},
+					content: {
+						style: {},
+						text: null
+					}
+				},
+				centerRightBottom: {
+					style: {
+						height: '25%'
 					},
 					content: {
 						style: {},
@@ -138,13 +255,6 @@ export default {
 		background: none !important;
 		width: 100%;
 		position: relative;
-		.icon-group {
-			position: absolute;
-			top: 6px;
-			right: 10px;
-			cursor: pointer;
-			color: #fff;
-		}
 	}
 	.center {
 		height: 30px;
@@ -156,15 +266,21 @@ export default {
 			height: 100%;
 			&-top {
 				width: 100%;
-				background: chartreuse;
+				/* background: chartreuse; */
+				position: relative;
+				background: none !important;
 			}
 			&-center {
 				width: 100%;
-				background: cornflowerblue;
+				/* background: cornflowerblue; */
+				position: relative;
+				background: none !important;
 			}
 			&-bottom {
 				width: 100%;
-				background: darkcyan;
+				/* background: darkcyan; */
+				position: relative;
+				background: none !important;
 			}
 		}
 		&-center {
@@ -173,15 +289,21 @@ export default {
 			height: 100%;
 			&-top {
 				width: 100%;
-				background: #f0f;
+				/* background: #f0f; */
+				position: relative;
+				background: none !important;
 			}
 			&-center {
 				width: 100%;
-				background: darkgreen;
+				/* background: darkgreen; */
+				position: relative;
+				background: none !important;
 			}
 			&-bottom {
 				width: 100%;
-				background: darkorange;
+				/* background: darkorange; */
+				position: relative;
+				background: none !important;
 			}
 		}
 		&-right {
@@ -190,30 +312,36 @@ export default {
 			height: 100%;
 			&-top {
 				width: 100%;
-				background: #aaa;
+				/* background: #aaa; */
+				position: relative;
+				background: none !important;
 			}
 			&-center {
 				width: 100%;
-				background: deeppink;
+				/* background: deeppink; */
+				position: relative;
+				background: none !important;
 			}
 			&-bottom {
 				width: 100%;
-				background: hotpink;
+				/* background: hotpink; */
+				position: relative;
+				background: none !important;
 			}
 		}
 	}
 	.bottom {
+		width: 100%;
 		/* background: #0f0; */
 		background: none !important;
-		width: 100%;
 		position: relative;
-		.icon-group {
-			position: absolute;
-			top: 6px;
-			right: 10px;
-			cursor: pointer;
-			color: #fff;
-		}
+	}
+	.icon-group {
+		position: absolute;
+		top: 6px;
+		right: 10px;
+		cursor: pointer;
+		color: #fff;
 	}
 }
 </style>

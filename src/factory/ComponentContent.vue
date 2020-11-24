@@ -22,6 +22,7 @@ export default {
 		ContentStyleComponent,
 		ContentTextComponent
 	},
+	props: ['componentContent_p'],
 	data() {
 		return {
 			form: {
@@ -38,6 +39,12 @@ export default {
 				this.$emit('update:componentContent_p', newValue);
 			},
 			deep: true
+		}
+	},
+	created() {
+		// 回绑数据
+		if (this.componentContent_p) {
+			this.form = { ...this.componentContent_p };
 		}
 	}
 };

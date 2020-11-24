@@ -20,6 +20,7 @@ html,
 body {
 	height: 100%;
 	overflow: hidden;
+	padding-right: 0 !important;
 }
 #app {
 	font-family: Avenir, Helvetica, Arial, sans-serif;

@@ -25,8 +25,8 @@
 			</el-form-item>
 			<el-form-item label="是否重复">
 				<el-select v-model="form.isRepeat" placeholder="请选择背景是否重复" class="select-item">
-					<el-option label="是" :value="true"></el-option>
-					<el-option label="否" :value="false"></el-option>
+					<el-option label="是" value="repeat"></el-option>
+					<el-option label="否" value="no-repeat"></el-option>
 				</el-select>
 			</el-form-item>
 			<el-form-item label="圆点位置">
@@ -60,13 +60,14 @@ export default {
 		return {
 			form: {
 				bgType: 2,
-				gradientType: null,
-				linearType: null,
-				radialShape: null,
+				gradientType: 'linear-gradient',
+				linearType: 'to bottom',
+				radialShape: 'circle',
 				dotPosition: null,
+				isRepeat: 'repeat',
 				bgColorArr: [
 					{
-						value: 'rgba(19, 206, 102, 0.8)'
+						value: 'rgba(19, 206, 102, 1)'
 					}
 				]
 			}
@@ -79,6 +80,24 @@ export default {
 				this.$emit('update:layoutStyle_p', styleJson);
 			},
 			deep: true
+		}
+	},
+	created() {
+		// 回绑数据
+		for (const key in this.layoutStyle_p) {
+			const item = this.layoutStyle_p[key];
+			if (key === 'background-image') {
+				if (item.indexOf('base64') === -1) {
+					const json = this.parseBgImageHandler(item);
+					this.form = { ...this.form, ...json };
+				}
+			}
+			if (key === 'background-position') {
+				this.form.dotPosition = item;
+			}
+			if (key === 'background-repeat') {
+				this.form.isRepeat = item;
+			}
 		}
 	},
 	methods: {
@@ -125,6 +144,25 @@ export default {
 			}
 			styleJson['background-image'] = `${value.gradientType}(${tempParams}, ${colorStr})`;
 			return styleJson;
+		},
+		parseBgImageHandler(backgroundImage) {
+			const backgroundImageTemp = backgroundImage.slice(0, backgroundImage.length - 1);
+			const imageArr = backgroundImageTemp.split('t(');
+			const linearArr = imageArr[1].split(',');
+			const colorArr = backgroundImageTemp.split('rgba(');
+			const bgColorArr = [];
+			for (let i = 1; i < colorArr.length; i++) {
+				const color = colorArr[i].replace('),', ')');
+				bgColorArr.push({
+					value: `rgba(${color}`
+				});
+			}
+			return {
+				gradientType: `${imageArr[0]}t`,
+				linearType: linearArr[0],
+				radialShape: linearArr[0],
+				bgColorArr: bgColorArr
+			};
 		}
 	}
 };
